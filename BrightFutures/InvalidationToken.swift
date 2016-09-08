@@ -30,7 +30,7 @@ extension InvalidationTokenType {
         return validContext(DefaultThreadingModel())
     }
     
-    public func validContext(_ parentContext: ExecutionContext = DefaultThreadingModel()) -> ExecutionContext {
+    public func validContext(_ parentContext: @escaping ExecutionContext = DefaultThreadingModel()) -> ExecutionContext {
         return { task in
             parentContext {
                 if !self.isInvalid {

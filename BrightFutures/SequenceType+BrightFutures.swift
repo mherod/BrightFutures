@@ -61,7 +61,7 @@ extension Sequence where Iterator.Element: AsyncType, Iterator.Element.Value: Re
     
     /// Performs the fold operation over a sequence of futures. The folding is performed
     /// in the given context.
-    public func fold<R>(_ context: ExecutionContext, zero: R, f: @escaping (R, Iterator.Element.Value.Value) -> R) -> Future<R, Iterator.Element.Value.Error> {
+    public func fold<R>(_ context: @escaping ExecutionContext, zero: R, f: @escaping (R, Iterator.Element.Value.Value) -> R) -> Future<R, Iterator.Element.Value.Error> {
         return reduce(Future<R, Iterator.Element.Value.Error>(value: zero)) { zero, elem in
             return zero.flatMap(MaxStackDepthExecutionContext) { zeroVal in
                 elem.map(context) { elemVal in
