@@ -19,7 +19,7 @@ public protocol InvalidationTokenType {
     var future: Future<NoValue, BrightFuturesError<NoError>> { get }
     
     /// This context executes as long as the token is valid. If the token is invalid, the given blocks are discarded
-    func validContext(_ parentContext: ExecutionContext) -> ExecutionContext
+    func validContext(_ parentContext: @escaping ExecutionContext) -> ExecutionContext
 
 }
 
